@@ -1720,28 +1720,29 @@
 	position: absolute;
 	top: 0;
 	left: 0;
-	width: 6.8rem;
+	width: 8.2rem; /* 2026-10-23 カンプ（Frame 772 8548:36172）：68 → 82px の正方形 */
 	height: 8.2rem;
-	background: url(../img/common/fv_corp_bg.svg) no-repeat left top / 100% 100%;
+	background: linear-gradient(90deg, #53abab, #6dcbc0 50%, #87ecd5);
+	border-radius: 0.6rem 0 0 0.6rem;
 }
 .fvCta .indiv .icon {
-	background-image: url(../img/common/fv_indiv_bg.svg);
+	background: linear-gradient(90deg, #0391dd, #02a8e6 50%, #00bfef);
 }
 .fvCta .mail .icon img {
 	position: absolute;
 	top: 2.4rem;
-	left: 1.79rem;
+	left: 2.3rem; /* 2026-10-23：アイコン部分が広がった分だけ右へ（17.9 → 23px） */
 	width: 3.65rem;
 }
 .fvCta .indiv .icon img {
 	top: 2.3rem;
-	left: 1.8rem;
+	left: 2.3rem;
 	width: 3.6rem;
 }
 .fvCta .mail .target,
 .fvCta .mail .txt {
 	position: absolute;
-	left: 11rem; /* 2026-10-23 カンプ「Group 853」：カードが 250px に広がり、文字は左から 110px（前 88px） */
+	left: 11.7rem; /* 2026-10-23 カンプ（Frame 772）：文字は左から 117px（Group 853 では 110px） */
 	width: 9.6rem;
 	display: block;
 	font-weight: 700;
@@ -1750,7 +1751,7 @@
 	white-space: nowrap;
 }
 .fvCta .mail .target {
-	top: 0.7rem; /* Group 853 は前のカンプより 2px 上 */
+	top: 0.6rem; /* Frame 772：キャップ上端 13px（Group 853 より 1px 上） */
 	color: #21b2a1;
 	font-size: 1.4rem;
 }
@@ -1758,7 +1759,7 @@
 	color: var(--color-blue);
 }
 .fvCta .mail .txt {
-	top: 2.9rem;
+	top: 2.8rem;
 	color: var(--color-navy2);
 	font-size: 1.6rem;
 }

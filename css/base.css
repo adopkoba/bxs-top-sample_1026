@@ -450,57 +450,70 @@ button {
 	top: calc(var(--header-h) + 6rem + 3.2rem); /* 重要なお知らせ（.newsBar 高さ 6rem）の下端から 32px＝1366px で y178（2026-10-23 ユーザー指示で 1023 の位置に戻した。FV-CTA とは別） */
 	right: 0;
 	z-index: 90;
-	width: 27.5rem;
+	width: 27rem;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-end;
-	gap: 0.5rem;
+	gap: 1rem; /* Figma：上下の間隔 10px */
 	pointer-events: none;
 }
-/* 2026-10-22 カンプ（Figma「Group 833」／固定CTA-電話・法人向け・個人向け-ホバー1013）
-   85×85 のアイコン部分だけ見せ、hover で 190px の白いパネルが左へ出てくる */
+/* 2026-10-23 カンプ（Figma「固定CTA-電話-1023」8566:14254／「固定CTA-法人向け-1023」8566:14290／「固定CTA-個人向け-1023」8566:14334）
+   270×82 の白いカード（FV-CTA と同じ影）。閉じた状態は左の 82×82 のアイコン部分だけ見せ、hover で全体が左へ出てくる（Smart Animate 0.3s ease-out） */
 .sideCta li {
-	width: 27.5rem;
+	width: 27rem;
 	opacity: 0;
-	transform: translateX(28.5rem);
+	transform: translateX(28rem);
 	/* ふわっと：ゆっくり動き出して、ゆっくり止まる（表示の切替・hover の開閉とも） */
 	transition: transform 1s cubic-bezier(0.45, 0.05, 0.25, 1), opacity 0.8s ease;
 }
 .sideCta.show li {
 	opacity: 1;
-	transform: translateX(19rem);
+	transform: translateX(18.8rem);
 	pointer-events: auto;
 }
 .sideCta.show li:nth-child(2) { transition-delay: 0.1s; }
 .sideCta.show li:nth-child(3) { transition-delay: 0.2s; }
 .sideCta a {
-	height: 8.5rem;
+	position: relative;
+	height: 8.2rem;
 	display: flex;
-	filter: drop-shadow(0 0 0.5rem rgba(0, 0, 0, 0.25));
+	background: #fff;
+	border-radius: 0.7rem 0 0 0.7rem;
+	box-shadow: 0 0.4rem 0.4rem rgba(0, 0, 0, 0.25);
+}
+/* カード全体の内側の影（左上に白・右下に黒）。アイコンの色の部分にもかかるよう一番上に重ねる */
+.sideCta a::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	border-radius: inherit;
+	box-shadow: inset 0.5rem 0.5rem 0.5rem rgba(255, 255, 255, 0.25), inset 0 0 0.5rem rgba(255, 255, 255, 0.25), inset -0.1rem -0.1rem 0.5rem rgba(0, 0, 0, 0.25);
+	pointer-events: none;
 }
 .sideCta .icon {
-	width: 8.5rem;
-	height: 8.5rem;
+	width: 8.2rem;
+	height: 8.2rem;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	flex-shrink: 0;
 	background: var(--cta-bg);
-	border-radius: 1rem 0 0 1rem;
+	border-radius: 0.7rem 0 0 0.7rem;
 	box-shadow: inset 0.5rem 0.5rem 0.5rem rgba(255, 255, 255, 0.25), inset -0.1rem -0.1rem 0.5rem rgba(0, 0, 0, 0.25);
 }
+/* アイコン（白）：電話 33px／法人 36.5px／個人 36px */
 .sideCta .icon img.pc {
-	width: 5.5rem;
+	width: 3.65rem;
 }
-/* 白いパネル：上下に 2px の線（電話はグラデ） */
+.sideCta .tel .icon img.pc {
+	width: 3.3rem;
+}
+.sideCta .indiv .icon img.pc {
+	width: 3.6rem;
+}
 .sideCta .body {
 	position: relative;
 	flex: 1;
-	background:
-		var(--cta-line) left top / 100% 2px no-repeat,
-		var(--cta-line) left bottom / 100% 2px no-repeat,
-		#fff;
-	transition: box-shadow 0.3s ease-out;
 }
 .sideCta .ttl,
 .sideCta .sub {
@@ -508,45 +521,51 @@ button {
 	line-height: 2.2rem;
 	white-space: nowrap;
 }
+/* 法人・個人：「〇〇向け」14px（文字のかたまりの中で中央）／「修理・点検を／メールで相談」16px（左寄せ） */
 .sideCta .ttl {
-	top: 0.935rem; /* Figma の書き出し画像と文字の上端（墨の上端 12px）を実測で合わせた */
-	left: 2.4rem;
+	top: 0.616rem; /* キャップ上端 13px */
+	left: 4.436rem;
+	width: 10.368rem;
 	color: var(--cta-ttl);
-	font-size: 1.8rem;
-	font-weight: 500;
+	font-size: 1.4rem;
+	font-weight: 700;
+	text-align: center;
 }
 .sideCta .sub {
-	top: 3.035rem; /* 2行。Figma の書き出し画像と実測で合わせた（墨の上端 33px。計算値より 4px 下。2026-10-22 ユーザー指摘で修正） */
-	left: 4.2rem;
+	top: 2.775rem; /* キャップ上端 34px */
+	left: 4.436rem;
 	color: var(--color-navy2);
-	font-size: 1.8rem;
+	font-size: 1.6rem;
 	font-weight: 700;
 }
 /* 配色（Figma：TELグラデ／法人グラデ／個人グラデ） */
 .sideCta .tel {
 	--cta-bg: linear-gradient(-87.68deg, #0082d0 15.344%, #0e6aac 60.554%, #115089 105.76%);
-	--cta-line: linear-gradient(-87.68deg, #0082d0 15.344%, #0e6aac 60.554%, #115089 105.76%);
-	--cta-ttl: var(--color-text);
+	--cta-ttl: var(--color-navy2);
 }
 .sideCta .corp {
 	--cta-bg: linear-gradient(90deg, #53abab, #6dcbc0 50%, #87ecd5);
-	--cta-line: linear-gradient(#84e9d3, #84e9d3);
 	--cta-ttl: #21b2a1;
 }
 .sideCta .indiv {
 	--cta-bg: linear-gradient(90deg, #0391dd, #02a8e6 50%, #00bfef);
-	--cta-line: linear-gradient(#00bdee, #00bdee);
 	--cta-ttl: var(--color-blue);
 }
-/* 電話：「電話で相談」18px／番号 24px（グラデの文字） */
+/* 電話：「電話で相談」16px（#122D59）／番号 22px（グラデの文字）。どちらもパネルの中央 */
+.sideCta .tel .ttl,
+.sideCta .tel .sub {
+	left: 0;
+	right: 0;
+	width: auto;
+	text-align: center;
+}
 .sideCta .tel .ttl {
-	top: 1.735rem; /* キャップ上端 23px */
-	left: 1.7rem;
+	top: 1.475rem; /* キャップ上端 21px */
+	font-size: 1.6rem;
 }
 .sideCta .tel .sub {
-	top: 4.113rem; /* キャップ上端 45px */
-	left: 1.7rem;
-	font-size: 2.4rem;
+	top: 4.053rem; /* キャップ上端 45px */
+	font-size: 2.2rem;
 	background: linear-gradient(-70.17deg, #0082d0 15.344%, #0e6aac 60.554%, #115089 105.76%);
 	-webkit-background-clip: text;
 	background-clip: text;
@@ -557,10 +576,6 @@ button {
 		transform: translateX(0);
 		transition-duration: 0.8s;
 		transition-delay: 0s;
-	}
-	/* hover 中はパネルにも内側の影（Figma のバリアント2） */
-	.sideCta.show li:hover .body {
-		box-shadow: inset 0.5rem 0.5rem 0.5rem rgba(255, 255, 255, 0.25), inset -0.1rem -0.1rem 0.5rem rgba(0, 0, 0, 0.25);
 	}
 }
 @media all and (max-width: 896px) {
@@ -592,7 +607,10 @@ button {
 		color: #fff;
 		background: var(--cta-bg);
 		border-radius: 0.6rem 0.6rem 0 0;
-		filter: none;
+		box-shadow: none;
+	}
+	.sideCta a::after {
+		display: none;
 	}
 	.sideCta .icon {
 		width: 2.6rem;
@@ -610,8 +628,10 @@ button {
 		background: none;
 		border: 0;
 	}
-	.sideCta .ttl {
+	.sideCta .ttl,
+	.sideCta .tel .ttl {
 		position: static;
+		width: auto;
 		color: #fff;
 		font-size: 1.2rem;
 		font-weight: 700;
