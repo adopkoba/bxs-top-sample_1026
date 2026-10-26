@@ -1730,13 +1730,13 @@
 }
 .fvCta .mail .icon img {
 	position: absolute;
-	top: 2.4rem;
-	left: 2.3rem; /* 2026-10-23：アイコン部分が広がった分だけ右へ（17.9 → 23px） */
+	top: 2.5rem; /* 2026-10-26 カンプ（Group 854）：アイコンは左 27px・上 25px（前 23・24） */
+	left: 2.7rem;
 	width: 3.65rem;
 }
 .fvCta .indiv .icon img {
-	top: 2.3rem;
-	left: 2.3rem;
+	top: 2.5rem; /* 2026-10-26：左 27px・上 25px（前 23・23） */
+	left: 2.7rem;
 	width: 3.6rem;
 }
 .fvCta .mail .target,
